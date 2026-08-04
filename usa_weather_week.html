@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>USA Weather — 7 Day Forecast (Test)</title>
+<style>
+  :root {
+    --bg: #0f1729;
+    --card: #1b2540;
+    --card-hover: #223055;
+    --text: #e8edf7;
+    --muted: #93a1c4;
+    --accent: #f5b301;
+    --line: #2c3a5e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: radial-gradient(1200px 600px at 50% -10%, #1c2848 0%, var(--bg) 60%);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 8px; }
+  h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.5px; }
+  h1 span { color: var(--accent); }
+  .subtitle { color: var(--muted); margin-top: 6px; font-size: 0.95rem; }
+  .badge {
+    display: inline-block; margin-top: 14px; padding: 4px 12px;
+    background: rgba(245,179,1,0.12); color: var(--accent);
+    border: 1px solid rgba(245,179,1,0.35); border-radius: 999px;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.3px;
+  }
+  .controls { display: flex; justify-content: center; gap: 8px; margin: 26px 0; flex-wrap: wrap; }
+  .city-btn {
+    background: var(--card); color: var(--text); border: 1px solid var(--line);
+    padding: 8px 16px; border-radius: 10px; cursor: pointer; font-size: 0.9rem;
+    transition: all 0.15s ease;
+  }
+  .city-btn:hover { background: var(--card-hover); }
+  .city-btn.active { background: var(--accent); color: #1a1a1a; border-color: var(--accent); font-weight: 600; }
+  .grid {
+    display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; margin-top: 10px;
+  }
+  @media (max-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 560px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  .day {
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    padding: 18px 12px; text-align: center; transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .day:hover { transform: translateY(-4px); background: var(--card-hover); }
+  .dow { font-weight: 700; font-size: 1rem; }
+  .date { color: var(--muted); font-size: 0.75rem; margin-bottom: 10px; }
+  .icon { font-size: 2.6rem; margin: 6px 0; }
+  .cond { font-size: 0.8rem; color: var(--muted); min-height: 32px; }
+  .temps { margin-top: 10px; font-size: 1.05rem; }
+  .hi { font-weight: 700; }
+  .lo { color: var(--muted); }
+  .meta { margin-top: 10px; font-size: 0.72rem; color: var(--muted); line-height: 1.6; border-top: 1px solid var(--line); padding-top: 8px; }
+  footer { text-align: center; margin-top: 30px; color: var(--muted); font-size: 0.75rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>USA <span>Weather</span> — 7 Day Forecast</h1>
+    <div class="subtitle" id="citySubtitle">New York, NY</div>
+    <div class="badge">TEST PAGE · SAMPLE DATA</div>
+  </header>
+
+  <div class="controls" id="controls"></div>
+  <div class="grid" id="grid"></div>
+
+  <footer>Sample data for UI testing only — not a live forecast.</footer>
+</div>
+
+<script>
+  const icons = {
+    sunny: "☀️", partly: "⛅", cloudy: "☁️", rain: "🌧️",
+    storm: "⛈️", snow: "❄️", fog: "🌫️"
+  };
+  const condLabel = {
+    sunny: "Sunny", partly: "Partly Cloudy", cloudy: "Cloudy", rain: "Rain",
+    storm: "Thunderstorms", snow: "Snow", fog: "Foggy"
+  };
+
+  // Sample week of data per city: [dayCondition, high(F), low(F), wind(mph), precip(%)]
+  const cities = {
+    "New York, NY": [
+      ["partly",62,48,9,10],["sunny",67,50,7,0],["cloudy",64,52,11,20],
+      ["rain",58,49,14,80],["storm",60,50,18,90],["partly",65,51,10,15],["sunny",70,54,6,5]
+    ],
+    "Chicago, IL": [
+      ["cloudy",55,41,13,30],["rain",52,40,16,70],["partly",58,43,10,10],
+      ["sunny",61,45,8,0],["partly",59,44,12,20],["storm",54,42,20,85],["cloudy",56,43,11,25]
+    ],
+    "Denver, CO": [
+      ["sunny",68,40,7,0],["partly",65,38,9,5],["snow",44,28,15,60],
+      ["snow",38,24,18,80],["sunny",55,34,8,0],["partly",63,39,6,10],["sunny",70,42,5,0]
+    ],
+    "Miami, FL": [
+      ["storm",86,74,12,70],["rain",84,73,14,80],["partly",88,75,10,30],
+      ["sunny",90,76,8,10],["partly",89,75,9,20],["storm",85,74,16,75],["rain",83,73,13,65]
+    ],
+    "Seattle, WA": [
+      ["rain",54,45,11,85],["cloudy",56,46,9,40],["rain",53,44,13,80],
+      ["fog",52,43,5,30],["partly",58,47,8,15],["cloudy",57,46,10,35],["rain",55,45,12,75]
+    ],
+    "Phoenix, AZ": [
+      ["sunny",95,72,6,0],["sunny",97,74,5,0],["partly",93,71,8,5],
+      ["sunny",96,73,4,0],["sunny",98,75,5,0],["partly",92,70,9,10],["sunny",95,72,6,0]
+    ]
+  };
+
+  const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  const monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+  function renderControls(active) {
+    const c = document.getElementById("controls");
+    c.innerHTML = "";
+    Object.keys(cities).forEach(city => {
+      const b = document.createElement("button");
+      b.className = "city-btn" + (city === active ? " active" : "");
+      b.textContent = city.split(",")[0];
+      b.onclick = () => render(city);
+      c.appendChild(b);
+    });
+  }
+
+  function render(city) {
+    document.getElementById("citySubtitle").textContent = city;
+    renderControls(city);
+    const grid = document.getElementById("grid");
+    grid.innerHTML = "";
+    const today = new Date();
+    cities[city].forEach((d, i) => {
+      const date = new Date(today);
+      date.setDate(today.getDate() + i);
+      const [cond, hi, lo, wind, precip] = d;
+      const el = document.createElement("div");
+      el.className = "day";
+      el.innerHTML = `
+        <div class="dow">${i === 0 ? "Today" : dayNames[date.getDay()]}</div>
+        <div class="date">${monthNames[date.getMonth()]} ${date.getDate()}</div>
+        <div class="icon">${icons[cond]}</div>
+        <div class="cond">${condLabel[cond]}</div>
+        <div class="temps"><span class="hi">${hi}°</span> / <span class="lo">${lo}°</span></div>
+        <div class="meta">💨 ${wind} mph<br>💧 ${precip}%</div>
+      `;
+      grid.appendChild(el);
+    });
+  }
+
+  render("New York, NY");
+</script>
+</body>
+</html>
