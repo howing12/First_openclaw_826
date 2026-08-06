@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 香港市場一頁通 — 恒指 + 天氣</title>
+<style>
+  :root {
+    --bg: #0f172a; --card: #1e293b; --card2: #273449;
+    --text: #e2e8f0; --muted: #94a3b8;
+    --up: #10b981; --down: #ef4444; --flat: #94a3b8;
+    --accent: #38bdf8; --border: #334155;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", "PingFang HK", "Microsoft JhengHei", sans-serif;
+    background: var(--bg); color: var(--text);
+    padding: 20px; max-width: 860px; margin: 0 auto;
+  }
+  h1 { font-size: 1.4rem; margin-bottom: 4px; }
+  .sub { color: var(--muted); font-size: 0.85rem; margin-bottom: 20px; }
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 20px; margin-bottom: 20px;
+  }
+  .card h2 {
+    font-size: 1.05rem; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .hsi-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 10px; margin-bottom: 16px;
+  }
+  .price { font-size: 2.2rem; font-weight: 700; }
+  .change { font-size: 1.1rem; font-weight: 600; }
+  .up { color: var(--up); } .down { color: var(--down); } .flat { color: var(--flat); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  th, td { padding: 8px 10px; text-align: right; border-bottom: 1px solid var(--border); }
+  th { color: var(--muted); font-weight: 500; font-size: 0.8rem; }
+  td:first-child, th:first-child { text-align: left; }
+  tr:last-child td { border-bottom: none; }
+  .spark { color: var(--muted); font-size: 0.75rem; }
+  .wx-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
+    gap: 10px;
+  }
+  .wx-day {
+    background: var(--card2); border-radius: 10px; padding: 12px 10px;
+    text-align: center;
+  }
+  .wx-day .d { font-size: 0.8rem; color: var(--muted); }
+  .wx-day .w { font-size: 0.95rem; font-weight: 600; margin: 4px 0; }
+  .wx-day .t { font-size: 1.1rem; font-weight: 700; }
+  .wx-day .t span { color: var(--accent); font-weight: 500; }
+  .wx-day .desc { font-size: 0.72rem; color: var(--muted); margin-top: 6px; line-height: 1.3; }
+  .foot { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top: 10px; }
+  .badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 20px; background: #334155; color: var(--muted); }
+</style>
+</head>
+<body>
+
+  <h1>📊 香港市場一頁通</h1>
+  <div class="sub" id="updated">恒生指數 + 香港天氣 · 數據由 Yahoo Finance / 香港天文台提供</div>
+
+  <!-- 恒生指數 -->
+  <div class="card">
+    <h2>📈 恒生指數 <span class="badge">一週收市</span></h2>
+    <div class="hsi-head">
+      <div>
+        <div class="price" id="lastPrice">—</div>
+        <div class="change" id="lastChange">—</div>
+      </div>
+      <div class="spark" id="weekNote">—</div>
+    </div>
+    <table id="hsiTable">
+      <thead>
+        <tr><th>日期</th><th>收市價</th><th>升跌</th><th>升跌%</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <!-- 香港天氣 -->
+  <div class="card">
+    <h2>🌤️ 香港一週天氣 <span class="badge">天文台預報</span></h2>
+    <div class="wx-grid" id="wxGrid"></div>
+  </div>
+
+  <div class="foot">此頁面為靜態快照 · 更新時間見下 · 重新整理瀏覽器可重載</div>
+
+<script>
+// ===== 恒指數據（最近 8 個交易日）=====
+const HSI = [
+  { "d": "2026-07-27", "c": 25207.18 },
+  { "d": "2026-07-28", "c": 25310.85 },
+  { "d": "2026-07-29", "c": 25807.92 },
+  { "d": "2026-07-30", "c": 25858.88 },
+  { "d": "2026-07-31", "c": 25884.43 },
+  { "d": "2026-08-03", "c": 26009.40 },
+  { "d": "2026-08-04", "c": 25852.92 },
+  { "d": "2026-08-05", "c": 25915.82 }
+];
+
+// ===== 香港天氣（7 日預報）=====
+const WX = [
+  { "d": "8月7日", "w": "星期五", "hi": 34, "lo": 28, "x": "大致天晴，日間酷熱。稍後局部地區有驟雨及狂風雷暴。" },
+  { "d": "8月8日", "w": "星期六", "hi": 35, "lo": 28, "x": "大致天晴，日間極端酷熱。早晚局部地區有驟雨及狂風雷暴。" },
+  { "d": "8月9日", "w": "星期日", "hi": 35, "lo": 28, "x": "大致天晴。日間極端酷熱，稍後局部地區有驟雨及雷暴。" },
+  { "d": "8月10日", "w": "星期一", "hi": 34, "lo": 28, "x": "部分時間有陽光，局部地區有驟雨。日間酷熱。" },
+  { "d": "8月11日", "w": "星期二", "hi": 33, "lo": 28, "x": "部分時間有陽光，有一兩陣驟雨。日間酷熱。" },
+  { "d": "8月12日", "w": "星期三", "hi": 32, "lo": 28, "x": "短暫時間有陽光，有一兩陣驟雨。" },
+  { "d": "8月13日", "w": "星期四", "hi": 32, "lo": 27, "x": "短暫時間有陽光，有幾陣驟雨。" }
+];
+
+const fmt = n => n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const cls = v => v > 0 ? "up" : (v < 0 ? "down" : "flat");
+const sign = v => (v > 0 ? "+" : "") + v.toFixed(2);
+
+// 恒指表格（一週 = 最後 7 個交易日）
+const last = HSI[HSI.length - 1];
+document.getElementById("lastPrice").textContent = fmt(last.c);
+const prev = HSI[HSI.length - 2];
+const chg = last.c - prev.c, pct = (chg / prev.c) * 100;
+const el = document.getElementById("lastChange");
+el.textContent = `${sign(chg)}  (${pct >= 0 ? "+" : ""}${pct.toFixed(2)}%)`;
+el.className = "change " + cls(chg);
+document.getElementById("weekNote").textContent =
+  `一週累計: ${sign(last.c - HSI[0].c)} (${((last.c - HSI[0].c) / HSI[0].c * 100).toFixed(2)}%)`;
+
+const tbody = document.querySelector("#hsiTable tbody");
+for (let i = 1; i < HSI.length; i++) {
+  const row = HSI[i], prevRow = HSI[i - 1];
+  const d = row.d.slice(5).replace("-", "/");
+  const diff = row.c - prevRow.c, p = (diff / prevRow.c) * 100;
+  const tr = document.createElement("tr");
+  tr.innerHTML = `
+    <td>${d}</td>
+    <td>${fmt(row.c)}</td>
+    <td class="${cls(diff)}">${sign(diff)}</td>
+    <td class="${cls(diff)}">${p >= 0 ? "+" : ""}${p.toFixed(2)}%</td>`;
+  tbody.appendChild(tr);
+}
+
+// 天氣卡片
+const grid = document.getElementById("wxGrid");
+WX.forEach(x => {
+  const div = document.createElement("div");
+  div.className = "wx-day";
+  div.innerHTML = `
+    <div class="d">${x.d} · ${x.w}</div>
+    <div class="w">${x.hi}°<span> / ${x.lo}°</span></div>
+    <div class="desc">${x.x}</div>`;
+  grid.appendChild(div);
+});
+
+const now = new Date();
+document.getElementById("updated").textContent =
+  `恒生指數 + 香港天氣 · 最後更新: ${now.toLocaleString("zh-HK")}`;
+</script>
+</body>
+</html>
