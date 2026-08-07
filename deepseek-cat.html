@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>肥貓偷魚</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; }
+  body {
+    background: #fdf1dd;
+    display: flex; align-items: center; justify-content: center;
+  }
+  svg { width: 100%; height: 100%; max-width: 480px; display: block; }
+  text { font-family: "PingFang HK", "Microsoft JhengHei", "Noto Sans TC", sans-serif; font-weight: 700; }
+</style>
+</head>
+<body>
+<svg viewBox="0 0 420 740" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- 背景牆 -->
+  <rect x="0" y="0" width="420" height="520" fill="#fdf1dd"/>
+  <g stroke="#f0e0c2" stroke-width="2" opacity="0.7">
+    <line x1="70" y1="0" x2="70" y2="520"/>
+    <line x1="140" y1="0" x2="140" y2="520"/>
+    <line x1="210" y1="0" x2="210" y2="520"/>
+    <line x1="280" y1="0" x2="280" y2="520"/>
+    <line x1="350" y1="0" x2="350" y2="520"/>
+    <line x1="0" y1="65" x2="420" y2="65"/>
+    <line x1="0" y1="130" x2="420" y2="130"/>
+    <line x1="0" y1="195" x2="420" y2="195"/>
+    <line x1="0" y1="260" x2="420" y2="260"/>
+    <line x1="0" y1="325" x2="420" y2="325"/>
+    <line x1="0" y1="390" x2="420" y2="390"/>
+    <line x1="0" y1="455" x2="420" y2="455"/>
+  </g>
+
+  <!-- 地板 -->
+  <rect x="0" y="520" width="420" height="220" fill="#d9a066"/>
+  <g stroke="#c08a52" stroke-width="2">
+    <line x1="0" y1="560" x2="420" y2="560"/>
+    <line x1="0" y1="600" x2="420" y2="600"/>
+    <line x1="0" y1="640" x2="420" y2="640"/>
+    <line x1="0" y1="680" x2="420" y2="680"/>
+    <line x1="105" y1="520" x2="105" y2="740"/>
+    <line x1="210" y1="520" x2="210" y2="740"/>
+    <line x1="315" y1="520" x2="315" y2="740"/>
+  </g>
+
+  <!-- 夜晚窗戶 -->
+  <rect x="295" y="178" width="120" height="10" rx="3" fill="#ffffff"/>
+  <rect x="300" y="50" width="110" height="130" rx="6" fill="#1f3050" stroke="#ffffff" stroke-width="8"/>
+  <circle cx="320" cy="80" r="2" fill="#ffffff"/>
+  <circle cx="340" cy="105" r="2" fill="#ffffff"/>
+  <circle cx="370" cy="75" r="2" fill="#ffffff"/>
+  <circle cx="388" cy="125" r="2" fill="#ffffff"/>
+  <circle cx="330" cy="140" r="2" fill="#ffffff"/>
+  <circle cx="355" cy="90" r="13" fill="#ffe9a8"/>
+  <circle cx="361" cy="85" r="11" fill="#1f3050"/>
+  <line x1="355" y1="50" x2="355" y2="180" stroke="#ffffff" stroke-width="6"/>
+  <line x1="300" y1="115" x2="410" y2="115" stroke="#ffffff" stroke-width="6"/>
+
+  <!-- 掛鍋 -->
+  <line x1="150" y1="70" x2="190" y2="70" stroke="#8a8a8a" stroke-width="3"/>
+  <path d="M158 78 Q170 66 182 78" fill="none" stroke="#8a8a8a" stroke-width="3"/>
+  <rect x="156" y="80" width="28" height="15" rx="4" fill="#c8c8c8" stroke="#8a8a8a" stroke-width="2"/>
+
+  <!-- 雪櫃 -->
+  <rect x="18" y="95" width="105" height="215" rx="10" fill="#e8f2f8" stroke="#b9cede" stroke-width="3"/>
+  <line x1="18" y1="200" x2="123" y2="200" stroke="#b9cede" stroke-width="3"/>
+  <rect x="110" y="115" width="7" height="60" rx="3" fill="#9db8cb"/>
+  <rect x="110" y="215" width="7" height="60" rx="3" fill="#9db8cb"/>
+  <text x="40" y="150" font-size="20">🐟</text>
+  <rect x="52" y="158" width="26" height="20" fill="#ffffff" stroke="#d0d0d0" stroke-width="1.5"/>
+  <line x1="56" y1="164" x2="74" y2="164" stroke="#cccccc" stroke-width="1.5"/>
+  <line x1="56" y1="169" x2="74" y2="169" stroke="#cccccc" stroke-width="1.5"/>
+  <text x="45" y="260" font-size="16">🐾</text>
+
+  <!-- 廚房枱 -->
+  <rect x="225" y="430" width="195" height="25" fill="#b0763f"/>
+  <rect x="225" y="455" width="195" height="65" fill="#9a6234" stroke="#83522a" stroke-width="2"/>
+  <line x1="225" y1="490" x2="420" y2="490" stroke="#83522a" stroke-width="2"/>
+  <circle cx="255" cy="487" r="4" fill="#e8c98a"/>
+  <circle cx="390" cy="487" r="4" fill="#e8c98a"/>
+
+  <!-- 水桶+入面條魚 -->
+  <ellipse cx="72" cy="560" rx="42" ry="12" fill="#cfe6f4" stroke="#6f97b8" stroke-width="3"/>
+  <path d="M32 560 L112 560 L102 635 L42 635 Z" fill="#a9cbe3" stroke="#6f97b8" stroke-width="3"/>
+  <ellipse cx="72" cy="560" rx="38" ry="9" fill="#e2f1fa"/>
+  <g transform="translate(72,548)">
+    <path d="M0 8 Q20 -10 40 8 Q20 24 0 8 Z" fill="#ffb84d" stroke="#e08c25" stroke-width="2"/>
+    <path d="M0 8 L-12 -2 L-12 18 Z" fill="#ffb84d" stroke="#e08c25" stroke-width="2"/>
+    <circle cx="30" cy="4" r="4" fill="#ffffff" stroke="#333333" stroke-width="1"/>
+    <circle cx="32" cy="4" r="2" fill="#333333"/>
+    <path d="M24 12 Q28 14 24 16" fill="none" stroke="#333333" stroke-width="1.5"/>
+  </g>
+
+  <!-- 地上魚骨(搞笑細節) -->
+  <g transform="translate(348,655) rotate(20)" stroke="#ffffff" stroke-width="4" stroke-linecap="round">
+    <line x1="0" y1="0" x2="26" y2="0"/>
+    <line x1="8" y1="0" x2="8" y2="7"/>
+    <line x1="18" y1="0" x2="18" y2="7"/>
+    <circle cx="0" cy="0" r="4" fill="#ffffff" stroke="none"/>
+    <circle cx="26" cy="0" r="4" fill="#ffffff" stroke="none"/>
+  </g>
+
+  <!-- 貓嘅影 -->
+  <ellipse cx="185" cy="625" rx="115" ry="18" fill="#000000" opacity="0.15"/>
+
+  <!-- ========== 超肥貓 ========== -->
+  <!-- 尾巴 -->
+  <path d="M95 545 C55 560 28 525 38 470 C46 430 70 418 86 435"
+        fill="none" stroke="#f7b24c" stroke-width="24" stroke-linecap="round"/>
+  <path d="M95 545 C55 560 28 525 38 470 C46 430 70 418 86 435"
+        fill="none" stroke="#d98f2e" stroke-width="28" stroke-linecap="round" opacity="0"/>
+
+  <!-- 超巨型肥身 -->
+  <ellipse cx="185" cy="525" rx="105" ry="95" fill="#f7b24c" stroke="#d98f2e" stroke-width="4"/>
+  <ellipse cx="185" cy="552" rx="80" ry="52" fill="#fbd995"/>
+  <path d="M118 480 Q130 520 118 555" fill="none" stroke="#d98f2e" stroke-width="5" opacity="0.6"/>
+  <path d="M95 500 Q105 540 96 572" fill="none" stroke="#d98f2e" stroke-width="5" opacity="0.6"/>
+
+  <!-- 後腳 -->
+  <ellipse cx="140" cy="615" rx="26" ry="16" fill="#f7b24c" stroke="#d98f2e" stroke-width="3"/>
+  <ellipse cx="230" cy="615" rx="26" ry="16" fill="#f7b24c" stroke="#d98f2e" stroke-width="3"/>
+  <path d="M132 620 L132 627 M140 622 L140 629 M148 620 L148 627" stroke="#c9812a" stroke-width="2"/>
+  <path d="M222 620 L222 627 M230 622 L230 629 M238 620 L238 627" stroke="#c9812a" stroke-width="2"/>
+
+  <!-- 頭 -->
+  <ellipse cx="185" cy="388" rx="78" ry="70" fill="#f7b24c" stroke="#d98f2e" stroke-width="4"/>
+  <!-- 耳 -->
+  <path d="M112 345 L92 282 L150 324 Z" fill="#f7b24c" stroke="#d98f2e" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M258 345 L278 282 L220 324 Z" fill="#f7b24c" stroke="#d98f2e" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M116 336 L103 296 L140 324 Z" fill="#f6a3b0"/>
+  <path d="M254 336 L267 296 L230 324 Z" fill="#f6a3b0"/>
+  <!-- 頭頂斑紋 -->
+  <path d="M160 325 Q170 308 185 318" fill="none" stroke="#d98f2e" stroke-width="4" opacity="0.8"/>
+  <path d="M190 318 Q205 308 215 325" fill="none" stroke="#d98f2e" stroke-width="4" opacity="0.8"/>
+
+  <!-- 鬼祟笑眼 -->
+  <path d="M138 382 Q153 366 168 382" fill="none" stroke="#3a2a1a" stroke-width="5" stroke-linecap="round"/>
+  <path d="M202 382 Q217 366 232 382" fill="none" stroke="#3a2a1a" stroke-width="5" stroke-linecap="round"/>
+  <!-- 得戚眉 -->
+  <path d="M132 366 Q148 354 164 362" fill="none" stroke="#3a2a1a" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M206 362 Q222 354 238 366" fill="none" stroke="#3a2a1a" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- 尷紅 -->
+  <ellipse cx="140" cy="410" rx="9" ry="6" fill="#f6a3b0" opacity="0.7"/>
+  <ellipse cx="230" cy="410" rx="9" ry="6" fill="#f6a3b0" opacity="0.7"/>
+  <!-- 鼻 + 奸笑 + 流口水 -->
+  <path d="M179 400 L191 400 L185 410 Z" fill="#e5798f"/>
+  <path d="M162 424 Q185 446 208 424" fill="none" stroke="#3a2a1a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M205 428 Q214 434 210 442" fill="none" stroke="#3a2a1a" stroke-width="3" stroke-linecap="round"/>
+  <path d="M184 432 Q188 448 185 458" fill="#8fd0f2" opacity="0.85"/>
+  <!-- 鬍鬚 -->
+  <g stroke="#8a6a3a" stroke-width="2.5">
+    <line x1="120" y1="398" x2="86" y2="392"/>
+    <line x1="120" y1="408" x2="84" y2="410"/>
+    <line x1="250" y1="398" x2="284" y2="392"/>
+    <line x1="250" y1="408" x2="286" y2="410"/>
+  </g>
+  <!-- 汗滴 -->
+  <path d="M262 330 Q266 340 262 346 Q258 340 262 330 Z" fill="#8fd0f2"/>
+  <path d="M274 342 Q278 352 274 358 Q270 352 274 342 Z" fill="#8fd0f2" opacity="0.7"/>
+
+  <!-- 手臂伸向魚 -->
+  <path d="M205 480 Q245 460 268 428" fill="none" stroke="#d98f2e" stroke-width="28" stroke-linecap="round"/>
+  <path d="M205 480 Q245 460 268 428" fill="none" stroke="#f7b24c" stroke-width="22" stroke-linecap="round"/>
+  <ellipse cx="268" cy="424" rx="22" ry="15" fill="#f7b24c" stroke="#d98f2e" stroke-width="3" transform="rotate(-18 268 424)"/>
+  <path d="M258 430 L258 437 M267 433 L267 440 M276 430 L276 437" stroke="#c9812a" stroke-width="2"/>
+
+  <path d="M222 468 Q272 448 300 420" fill="none" stroke="#d98f2e" stroke-width="26" stroke-linecap="round"/>
+  <path d="M222 468 Q272 448 300 420" fill="none" stroke="#f7b24c" stroke-width="20" stroke-linecap="round"/>
+  <ellipse cx="302" cy="416" rx="20" ry="14" fill="#f7b24c" stroke="#d98f2e" stroke-width="3" transform="rotate(-12 302 416)"/>
+  <path d="M293 421 L293 428 M302 424 L302 431 M311 421 L311 428" stroke="#c9812a" stroke-width="2"/>
+
+  <!-- ========== 主角魚（碟上） ========== -->
+  <ellipse cx="315" cy="429" rx="62" ry="14" fill="#000000" opacity="0.12"/>
+  <ellipse cx="315" cy="424" rx="58" ry="15" fill="#ffffff" stroke="#dcdcdc" stroke-width="2"/>
+  <ellipse cx="315" cy="422" rx="50" ry="11" fill="#f6f6f6"/>
+  <!-- 橙魚：驚青樣 -->
+  <g transform="translate(302,418)">
+    <path d="M0 8 Q20 -10 40 8 Q20 24 0 8 Z" fill="#ff8c69" stroke="#e06a4a" stroke-width="2"/>
+    <path d="M40 8 L52 -2 L52 18 Z" fill="#ff8c69" stroke="#e06a4a" stroke-width="2"/>
+    <path d="M18 2 Q22 7 18 14" fill="none" stroke="#e06a4a" stroke-width="1.5"/>
+    <circle cx="10" cy="5" r="4.5" fill="#ffffff" stroke="#333333" stroke-width="1.2"/>
+    <circle cx="8" cy="5" r="2.2" fill="#333333"/>
+    <path d="M3 0 L7 3" stroke="#333333" stroke-width="1.5"/>
+    <ellipse cx="4" cy="10" rx="2.2" ry="3.4" fill="#7a4a2a"/>
+    <path d="M26 2 Q30 0 34 2" fill="none" stroke="#e06a4a" stroke-width="1.5"/>
+  </g>
+  <!-- 藍魚：木無表情 -->
+  <g transform="translate(336,422) rotate(8)">
+    <path d="M0 7 Q16 -8 32 7 Q16 20 0 7 Z" fill="#9cd0ec" stroke="#5b9bbe" stroke-width="2"/>
+    <path d="M0 7 L-10 -1 L-10 15 Z" fill="#9cd0ec" stroke="#5b9bbe" stroke-width="2"/>
+    <circle cx="24" cy="4" r="3.5" fill="#ffffff" stroke="#333333" stroke-width="1"/>
+    <circle cx="25" cy="4" r="1.6" fill="#333333"/>
+    <line x1="14" y1="9" x2="20" y2="9" stroke="#333333" stroke-width="1.5"/>
+  </g>
+
+  <!-- 魚嘅對話氣泡 -->
+  <ellipse cx="252" cy="366" rx="45" ry="19" fill="#ffffff" stroke="#333333" stroke-width="2.5"/>
+  <path d="M278 382 L292 400 L262 384 Z" fill="#ffffff" stroke="#333333" stroke-width="2.5"/>
+  <text x="252" y="371" text-anchor="middle" font-size="13" fill="#d63031">救命呀～！</text>
+
+  <!-- 貓嘅對話氣泡 -->
+  <ellipse cx="335" cy="222" rx="88" ry="44" fill="#ffffff" stroke="#333333" stroke-width="3"/>
+  <path d="M258 252 L236 298 L284 260 Z" fill="#ffffff" stroke="#333333" stroke-width="3"/>
+  <text x="335" y="212" text-anchor="middle" font-size="17" fill="#333333">嘿嘿嘿…</text>
+  <text x="335" y="236" text-anchor="middle" font-size="17" fill="#e17055">今晚食魚大餐！</text>
+
+  <!-- 底部字幕 -->
+  <rect x="0" y="690" width="420" height="50" fill="#2b1c10" opacity="0.88"/>
+  <text x="210" y="723" text-anchor="middle" font-size="22" fill="#ffd873">肥貓偷魚大作戰 🐱🐟 今晚加餸！</text>
+
+</svg>
+</body>
+</html>
